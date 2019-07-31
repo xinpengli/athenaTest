@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geekplus.test.athena.dao.RobotTaskMapper">
+  <resultMap id="BaseResultMap" type="com.geekplus.test.athena.entity.RobotTask">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="task_source_type" jdbcType="VARCHAR" property="taskSourceType" />
+    <result column="task_type" jdbcType="VARCHAR" property="taskType" />
+    <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
+    <result column="charger_id" jdbcType="INTEGER" property="chargerId" />
+    <result column="is_cancel" jdbcType="BIT" property="isCancel" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="robot_id" jdbcType="INTEGER" property="robotId" />
+    <result column="workstation_id" jdbcType="INTEGER" property="workstationId" />
+    <result column="shelf_code" jdbcType="VARCHAR" property="shelfCode" />
+    <result column="shelf_status" jdbcType="VARCHAR" property="shelfStatus" />
+    <result column="need_shelf_sides" jdbcType="VARCHAR" property="needShelfSides" />
+    <result column="shelf_init_angle" jdbcType="REAL" property="shelfInitAngle" />
+    <result column="start_point_y" jdbcType="DOUBLE" property="startPointY" />
+    <result column="start_point_x" jdbcType="DOUBLE" property="startPointX" />
+    <result column="end_point_x" jdbcType="DOUBLE" property="endPointX" />
+    <result column="end_point_y" jdbcType="DOUBLE" property="endPointY" />
+    <result column="multi_end_points" jdbcType="VARCHAR" property="multiEndPoints" />
+    <result column="receive_time" jdbcType="BIGINT" property="receiveTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, task_id, task_source_type, task_type, task_status, charger_id, is_cancel, priority, 
+    robot_id, workstation_id, shelf_code, shelf_status, need_shelf_sides, shelf_init_angle, 
+    start_point_y, start_point_x, end_point_x, end_point_y, multi_end_points, receive_time, 
+    create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.geekplus.test.athena.entity.RobotTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_robot_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.geekplus.test.athena.entity.RobotTaskExample">
+    delete from t_robot_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.geekplus.test.athena.entity.RobotTask">
+    insert into t_robot_task (id, task_id, task_source_type, 
+      task_type, task_status, charger_id, 
+      is_cancel, priority, robot_id, 
+      workstation_id, shelf_code, shelf_status, 
+      need_shelf_sides, shelf_init_angle, start_point_y, 
+      start_point_x, end_point_x, end_point_y, 
+      multi_end_points, receive_time, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{taskSourceType,jdbcType=VARCHAR}, 
+      #{taskType,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, #{chargerId,jdbcType=INTEGER}, 
+      #{isCancel,jdbcType=BIT}, #{priority,jdbcType=INTEGER}, #{robotId,jdbcType=INTEGER}, 
+      #{workstationId,jdbcType=INTEGER}, #{shelfCode,jdbcType=VARCHAR}, #{shelfStatus,jdbcType=VARCHAR}, 
+      #{needShelfSides,jdbcType=VARCHAR}, #{shelfInitAngle,jdbcType=REAL}, #{startPointY,jdbcType=DOUBLE}, 
+      #{startPointX,jdbcType=DOUBLE}, #{endPointX,jdbcType=DOUBLE}, #{endPointY,jdbcType=DOUBLE}, 
+      #{multiEndPoints,jdbcType=VARCHAR}, #{receiveTime,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.geekplus.test.athena.entity.RobotTask">
+    insert into t_robot_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskSourceType != null">
+        task_source_type,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="taskStatus != null">
+        task_status,
+      </if>
+      <if test="chargerId != null">
+        charger_id,
+      </if>
+      <if test="isCancel != null">
+        is_cancel,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="robotId != null">
+        robot_id,
+      </if>
+      <if test="workstationId != null">
+        workstation_id,
+      </if>
+      <if test="shelfCode != null">
+        shelf_code,
+      </if>
+      <if test="shelfStatus != null">
+        shelf_status,
+      </if>
+      <if test="needShelfSides != null">
+        need_shelf_sides,
+      </if>
+      <if test="shelfInitAngle != null">
+        shelf_init_angle,
+      </if>
+      <if test="startPointY != null">
+        start_point_y,
+      </if>
+      <if test="startPointX != null">
+        start_point_x,
+      </if>
+      <if test="endPointX != null">
+        end_point_x,
+      </if>
+      <if test="endPointY != null">
+        end_point_y,
+      </if>
+      <if test="multiEndPoints != null">
+        multi_end_points,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskSourceType != null">
+        #{taskSourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="chargerId != null">
+        #{chargerId,jdbcType=INTEGER},
+      </if>
+      <if test="isCancel != null">
+        #{isCancel,jdbcType=BIT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="robotId != null">
+        #{robotId,jdbcType=INTEGER},
+      </if>
+      <if test="workstationId != null">
+        #{workstationId,jdbcType=INTEGER},
+      </if>
+      <if test="shelfCode != null">
+        #{shelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfStatus != null">
+        #{shelfStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="needShelfSides != null">
+        #{needShelfSides,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfInitAngle != null">
+        #{shelfInitAngle,jdbcType=REAL},
+      </if>
+      <if test="startPointY != null">
+        #{startPointY,jdbcType=DOUBLE},
+      </if>
+      <if test="startPointX != null">
+        #{startPointX,jdbcType=DOUBLE},
+      </if>
+      <if test="endPointX != null">
+        #{endPointX,jdbcType=DOUBLE},
+      </if>
+      <if test="endPointY != null">
+        #{endPointY,jdbcType=DOUBLE},
+      </if>
+      <if test="multiEndPoints != null">
+        #{multiEndPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.geekplus.test.athena.entity.RobotTaskExample" resultType="java.lang.Long">
+    select count(*) from t_robot_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_robot_task
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskSourceType != null">
+        task_source_type = #{record.taskSourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskType != null">
+        task_type = #{record.taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskStatus != null">
+        task_status = #{record.taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargerId != null">
+        charger_id = #{record.chargerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isCancel != null">
+        is_cancel = #{record.isCancel,jdbcType=BIT},
+      </if>
+      <if test="record.priority != null">
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.robotId != null">
+        robot_id = #{record.robotId,jdbcType=INTEGER},
+      </if>
+      <if test="record.workstationId != null">
+        workstation_id = #{record.workstationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shelfCode != null">
+        shelf_code = #{record.shelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shelfStatus != null">
+        shelf_status = #{record.shelfStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needShelfSides != null">
+        need_shelf_sides = #{record.needShelfSides,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shelfInitAngle != null">
+        shelf_init_angle = #{record.shelfInitAngle,jdbcType=REAL},
+      </if>
+      <if test="record.startPointY != null">
+        start_point_y = #{record.startPointY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.startPointX != null">
+        start_point_x = #{record.startPointX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.endPointX != null">
+        end_point_x = #{record.endPointX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.endPointY != null">
+        end_point_y = #{record.endPointY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.multiEndPoints != null">
+        multi_end_points = #{record.multiEndPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveTime != null">
+        receive_time = #{record.receiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_robot_task
+    set id = #{record.id,jdbcType=BIGINT},
+      task_id = #{record.taskId,jdbcType=BIGINT},
+      task_source_type = #{record.taskSourceType,jdbcType=VARCHAR},
+      task_type = #{record.taskType,jdbcType=VARCHAR},
+      task_status = #{record.taskStatus,jdbcType=VARCHAR},
+      charger_id = #{record.chargerId,jdbcType=INTEGER},
+      is_cancel = #{record.isCancel,jdbcType=BIT},
+      priority = #{record.priority,jdbcType=INTEGER},
+      robot_id = #{record.robotId,jdbcType=INTEGER},
+      workstation_id = #{record.workstationId,jdbcType=INTEGER},
+      shelf_code = #{record.shelfCode,jdbcType=VARCHAR},
+      shelf_status = #{record.shelfStatus,jdbcType=VARCHAR},
+      need_shelf_sides = #{record.needShelfSides,jdbcType=VARCHAR},
+      shelf_init_angle = #{record.shelfInitAngle,jdbcType=REAL},
+      start_point_y = #{record.startPointY,jdbcType=DOUBLE},
+      start_point_x = #{record.startPointX,jdbcType=DOUBLE},
+      end_point_x = #{record.endPointX,jdbcType=DOUBLE},
+      end_point_y = #{record.endPointY,jdbcType=DOUBLE},
+      multi_end_points = #{record.multiEndPoints,jdbcType=VARCHAR},
+      receive_time = #{record.receiveTime,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.geekplus.test.athena.entity.RobotTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_robot_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

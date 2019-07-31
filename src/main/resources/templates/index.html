@@ -1,0 +1,150 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>athena测试(picking)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+
+    <script type="text/javascript">
+        function testSinglePointStations() {
+            var startStationId = parseInt(document.getElementById("start-stationid").value);
+            var endStationId = parseInt(document.getElementById("end-stationid").value);
+            var shelfNum = parseInt(document.getElementById("shelf-num").value);
+            var stationAry=[];
+            for (var i=startStationId;i<=endStationId;i++){
+                stationAry.push(i);
+            }
+            $.ajax({
+                url : "http://"+location.hostname+":62001/athenatest/rpc/testSinglePointStations",
+                type : "post",
+                data : JSON.stringify({stations:stationAry,shelfNum:shelfNum}),
+                contentType : "application/json;charset=UTF-8",
+                success: function( result ) {
+                    alert("发送成功");
+                    var responseText = document.getElementById("responseText");
+                    responseText.value=result;
+                }
+            });
+        }
+
+        function testNomalStations() {
+            var startStationId = parseInt(document.getElementById("start-stationid").value);
+            var endStationId = parseInt(document.getElementById("end-stationid").value);
+            var shelfNum = parseInt(document.getElementById("shelf-num").value);
+            var stationAry=[];
+            for (var i=startStationId;i<=endStationId;i++){
+                stationAry.push(i);
+            }
+            $.ajax({
+                url : "http://"+location.hostname+":62001/athenatest/rpc/testNomalStations",
+                type : "post",
+                data : JSON.stringify({stations:stationAry,shelfNum:shelfNum}),
+                contentType : "application/json;charset=UTF-8",
+                success: function( result ) {
+                    alert("发送成功");
+                    var responseText = document.getElementById("responseText");
+                    responseText.value=result;
+                }
+            });
+        }
+        function testNoShelfAreaStations() {
+            var startStationId = parseInt(document.getElementById("start-stationid").value);
+            var endStationId = parseInt(document.getElementById("end-stationid").value);
+            var shelfNum = parseInt(document.getElementById("shelf-num").value);
+            var stationAry=[];
+            for (var i=startStationId;i<=endStationId;i++){
+                stationAry.push(i);
+            }
+            $.ajax({
+                url : "http://"+location.hostname+":62001/athenatest/rpc/testNoShelfAreaStations",
+                type : "post",
+                contentType : "application/json;charset=UTF-8",
+                success: function( result ) {
+                    alert("发送成功");
+                    var responseText = document.getElementById("responseText");
+                    responseText.value=result;
+                }
+            });
+        }
+
+        function getUncompleteRobotTask() {
+
+            $.ajax({
+                url : "http://"+location.hostname+":61001/athenatest/rpc/getUncompleteRobotTask",
+                type : "post",
+                contentType : "application/json;charset=UTF-8",
+                success: function( result ) {
+                    alert("发送成功");
+                    var responseText = document.getElementById("responseText");
+                    responseText.value=result;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div>
+    <br>测试数据输入</br></br>
+    开始工作站id：<input type="text" name="start-staionid" id="start-stationid"/><br/>
+    结束工作站id：<input type="text" name="end-staionid" id="end-stationid"/><br/>
+    货架数量：<input type="text" name="shelf-num" id="shelf-num"/></br>
+    <br/>
+</div>
+<div>
+<label>测试一:货架区工位任务（单点，拣选）</br></label>
+    <input type="button" value="工位测试" onclick="testSinglePointStations()"/></br>
+    <br/>
+</div>
+
+<div>
+<label>测试二:无货架区任务</br></label>
+    <input type="button" value="无货架区测试" onclick="testNoShelfAreaStations()"/><br/>
+    </br>
+</div>
+<div>
+    <label>获取当前任务信息</br></label>
+    <input type="button" value="获取当前任务信息" onclick="getUncompleteRobotTask()"/><br/>
+    </br>
+</div>
+
+<div id="list">
+
+    <br>测试数据输入</br></br>
+    起始X坐标：<input type="text" name="startPlacementIndexX" id="startPlacementIndexX"/><br/>
+    起始Y坐标：<input type="text" name="startPlacementIndexY" id="startPlacementIndexY"/><br/>
+    结束X坐标：<input type="text" name="endPlacementIndexX" id="endPlacementIndexX"/><br/>
+    结束Y坐标：<input type="text" name="endPlacementIndexY" id="endPlacementIndexY"/><br/>
+    货架号：<input type="text" name="shelfCode" id="shelfCode"/></br>
+    <br/>
+
+    <table border="0.5">
+        <tr>
+            <th>货架编码</th>
+            <th>放置X坐标</th>
+            <th>放置Y坐标</th>
+            <th>货架角度</th>
+        </tr>
+
+        <tr th:each="shelf :${shelfList.list}">
+            <td th:text="${shelf.getShelfCode()}"></td>
+            <td th:text="${shelf.getPlacementX()}"></td>
+            <td th:text="${shelf.getPlacementY()}"></td>
+            <td th:text="${shelf.getAngle()}"></td>
+        </tr>
+    </table>
+    <p>当前 <span th:text="${shelfList.pageNum}"></span> 页,总 <span th:text="${shelfList.pages}"></span> 页,共 <span th:text="${shelfList.total}"></span> 条记录</p>
+    <a th:href="@{/matest/getShelfList}">首页</a>
+   <!-- <a th:href="@{/getAllPerson(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+    <a th:href="@{/getAllPerson(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+    <a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a>-->
+
+
+</div>
+
+<div>
+<label>服务器响应结果：</label><br/>
+    <textarea id="responseText" style="width: 1358px; height: 200px;"></textarea><br/>
+</div>
+</body>
+</html>

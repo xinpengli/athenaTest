@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:motan="http://api.weibo.com/schema/motan"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+ 	http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+
+<!-- athena调用的服务 -->
+	<motan:basicService id="referer_3_1_0" export="10001" shareChannel="true" version="3.1.0"/>
+
+	<bean id="robotTaskCallbackFacade_3_1_0" class="com.geekplus.test.athena.rpc.facade.impl.RobotTaskCallbackFacadeImpl"/>
+    <motan:service interface="com.geekplus.athena.api.facade.RobotTaskCallbackFacade"
+                   basicService="referer_3_1_0"
+                   ref="robotTaskCallbackFacade_3_1_0"
+                   export="10001"/>
+
+</beans>

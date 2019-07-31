@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geekplus.test.athena.dao.BaseShelfMapper">
+  <resultMap id="BaseResultMap" type="com.geekplus.test.athena.entity.BaseShelf">
+    <id column="shelf_code" jdbcType="VARCHAR" property="shelfCode" />
+    <result column="class_code" jdbcType="VARCHAR" property="classCode" />
+    <result column="shelf_type" jdbcType="TINYINT" property="shelfType" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="location_x" jdbcType="INTEGER" property="locationX" />
+    <result column="location_y" jdbcType="INTEGER" property="locationY" />
+    <result column="placement_x" jdbcType="INTEGER" property="placementX" />
+    <result column="placement_y" jdbcType="INTEGER" property="placementY" />
+    <result column="angle" jdbcType="REAL" property="angle" />
+    <result column="robotId" jdbcType="INTEGER" property="robotid" />
+    <result column="temperature" jdbcType="INTEGER" property="temperature" />
+    <result column="logic_id" jdbcType="INTEGER" property="logicId" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shelf_code, class_code, shelf_type, status, location_x, location_y, placement_x, 
+    placement_y, angle, robotId, temperature, logic_id, warehouse_id
+  </sql>
+  <select id="selectByExample" parameterType="com.geekplus.test.athena.entity.BaseShelfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_shelf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.geekplus.test.athena.entity.BaseShelfExample">
+    delete from t_base_shelf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.geekplus.test.athena.entity.BaseShelf">
+    insert into t_base_shelf (shelf_code, class_code, shelf_type, 
+      status, location_x, location_y, 
+      placement_x, placement_y, angle, 
+      robotId, temperature, logic_id, 
+      warehouse_id)
+    values (#{shelfCode,jdbcType=VARCHAR}, #{classCode,jdbcType=VARCHAR}, #{shelfType,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{locationX,jdbcType=INTEGER}, #{locationY,jdbcType=INTEGER}, 
+      #{placementX,jdbcType=INTEGER}, #{placementY,jdbcType=INTEGER}, #{angle,jdbcType=REAL}, 
+      #{robotid,jdbcType=INTEGER}, #{temperature,jdbcType=INTEGER}, #{logicId,jdbcType=INTEGER}, 
+      #{warehouseId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.geekplus.test.athena.entity.BaseShelf">
+    insert into t_base_shelf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shelfCode != null">
+        shelf_code,
+      </if>
+      <if test="classCode != null">
+        class_code,
+      </if>
+      <if test="shelfType != null">
+        shelf_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="locationX != null">
+        location_x,
+      </if>
+      <if test="locationY != null">
+        location_y,
+      </if>
+      <if test="placementX != null">
+        placement_x,
+      </if>
+      <if test="placementY != null">
+        placement_y,
+      </if>
+      <if test="angle != null">
+        angle,
+      </if>
+      <if test="robotid != null">
+        robotId,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="logicId != null">
+        logic_id,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shelfCode != null">
+        #{shelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null">
+        #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfType != null">
+        #{shelfType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="locationX != null">
+        #{locationX,jdbcType=INTEGER},
+      </if>
+      <if test="locationY != null">
+        #{locationY,jdbcType=INTEGER},
+      </if>
+      <if test="placementX != null">
+        #{placementX,jdbcType=INTEGER},
+      </if>
+      <if test="placementY != null">
+        #{placementY,jdbcType=INTEGER},
+      </if>
+      <if test="angle != null">
+        #{angle,jdbcType=REAL},
+      </if>
+      <if test="robotid != null">
+        #{robotid,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=INTEGER},
+      </if>
+      <if test="logicId != null">
+        #{logicId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.geekplus.test.athena.entity.BaseShelfExample" resultType="java.lang.Long">
+    select count(*) from t_base_shelf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_base_shelf
+    <set>
+      <if test="record.shelfCode != null">
+        shelf_code = #{record.shelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classCode != null">
+        class_code = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shelfType != null">
+        shelf_type = #{record.shelfType,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.locationX != null">
+        location_x = #{record.locationX,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationY != null">
+        location_y = #{record.locationY,jdbcType=INTEGER},
+      </if>
+      <if test="record.placementX != null">
+        placement_x = #{record.placementX,jdbcType=INTEGER},
+      </if>
+      <if test="record.placementY != null">
+        placement_y = #{record.placementY,jdbcType=INTEGER},
+      </if>
+      <if test="record.angle != null">
+        angle = #{record.angle,jdbcType=REAL},
+      </if>
+      <if test="record.robotid != null">
+        robotId = #{record.robotid,jdbcType=INTEGER},
+      </if>
+      <if test="record.temperature != null">
+        temperature = #{record.temperature,jdbcType=INTEGER},
+      </if>
+      <if test="record.logicId != null">
+        logic_id = #{record.logicId,jdbcType=INTEGER},
+      </if>
+      <if test="record.warehouseId != null">
+        warehouse_id = #{record.warehouseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_base_shelf
+    set shelf_code = #{record.shelfCode,jdbcType=VARCHAR},
+      class_code = #{record.classCode,jdbcType=VARCHAR},
+      shelf_type = #{record.shelfType,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      location_x = #{record.locationX,jdbcType=INTEGER},
+      location_y = #{record.locationY,jdbcType=INTEGER},
+      placement_x = #{record.placementX,jdbcType=INTEGER},
+      placement_y = #{record.placementY,jdbcType=INTEGER},
+      angle = #{record.angle,jdbcType=REAL},
+      robotId = #{record.robotid,jdbcType=INTEGER},
+      temperature = #{record.temperature,jdbcType=INTEGER},
+      logic_id = #{record.logicId,jdbcType=INTEGER},
+      warehouse_id = #{record.warehouseId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.geekplus.test.athena.entity.BaseShelfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_shelf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

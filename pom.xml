@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.geekplus.test</groupId>
+	<artifactId>geektest-maptest</artifactId>
+	<version>3.1</version>
+	<packaging>jar</packaging>
+
+	<name>maptest</name>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<nexus.host>192.168.16.3</nexus.host>
+		<nexus.port>8081</nexus.port>
+
+		<version.junit>4.12</version.junit>
+		<version.testng>6.11</version.testng>
+		<version.druid>1.1.9</version.druid>
+		<version.mysql>5.1.6</version.mysql>
+		<version.mybatis-generator>1.3.7</version.mybatis-generator>
+		<!--<version.ehcache.core>2.6.11</version.ehcache.core>-->
+
+		<version.starter>1.3.2</version.starter>
+		<version.springboot>1.5.3.RELEASE</version.springboot>
+		<version.shiro>1.3.2</version.shiro>
+		<version.quartz>2.2.2</version.quartz>
+		<version.motan>0.2.3</version.motan>
+		<version.jetty>9.3.8.v20160314</version.jetty>
+		<version.netty>4.1.4.Final</version.netty>
+		<version.vertx>3.4.1</version.vertx>
+
+		<version.fasterxml.jackson>2.9.5</version.fasterxml.jackson>
+		<version.alibaba.fastjson>1.2.36</version.alibaba.fastjson>
+		<version.fastjson>1.2.7</version.fastjson>
+		<version.pinyin4j>2.5.1</version.pinyin4j>
+
+		<version.guava>22.0</version.guava>
+		<version.slf4j>1.7.25</version.slf4j>
+		<version.log4j2>2.10.0</version.log4j2>
+		<version.dom4j>1.6.1</version.dom4j>
+		<version.xstream>1.4.8</version.xstream>
+		<version.httpclient>4.5.1</version.httpclient>
+		<version.commons.lang3>3.4</version.commons.lang3>
+		<version.commons.lang>2.6</version.commons.lang>
+		<version.commons.codec>1.10</version.commons.codec>
+		<version.commons.fileupload>1.3.2</version.commons.fileupload>
+		<version.commons.io>2.5</version.commons.io>
+		<version.poi>3.16</version.poi>
+		<version.pinyin4j>2.5.1</version.pinyin4j>
+
+		<version.servlet>3.1.0</version.servlet>
+		<version.jsp>2.2</version.jsp>
+		<version.jstl>1.2</version.jstl>
+		<version.jxl>2.6.12</version.jxl>
+		<version.dbunit>2.5.3</version.dbunit>
+		<version.websocket-client>9.3.14.v20161028</version.websocket-client>
+
+		<version.geektest-common>RELEASE</version.geektest-common>
+		<version.common-core>3.0</version.common-core>
+        <version.mybatis-dynamic-sql>1.1.0</version.mybatis-dynamic-sql>
+	</properties>
+	<dependencies>
+		<!--<dependency>
+			<groupId>com.geekplus</groupId>
+			<artifactId>athena-facade</artifactId>
+			<version>3.1.8-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>-->
+		<!-- 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.5</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+
+		<!--thymeleaf依賴-->
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		<exclusions>
+			<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-logging</artifactId>
+			</exclusion>
+
+		</exclusions>
+	</dependency>
+		<dependency>
+			<groupId>com.geekplus</groupId>
+			<artifactId>athena-facade</artifactId>
+			<version>3.1.8-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.geekplus</groupId>
+			<artifactId>common-core</artifactId>
+			<version>2.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.loggging.log4j</groupId>
+                        <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+
+
+			</exclusions>
+		</dependency>
+		<!-- java第三方工具 -->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-core</artifactId>
+			<version>4.1.14</version>
+		</dependency>
+		<!-- geekplus -->
+		<!--<dependency>
+			<groupId>com.geekplus</groupId>
+			<artifactId>common-core</artifactId>
+			<version>${version.common-core}</version>
+        <exclusions>
+           <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </exclusion>
+          <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.apache.loggging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+            </exclusion>
+
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+
+        </exclusions>
+		</dependency>-->
+		<!--<dependency>
+			<groupId>com.geekplus.test</groupId>
+			<artifactId>geektest-common</artifactId>
+			<version>${version.geektest-common}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>-->
+		<!-- test -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${version.testng}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- spring boot -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${version.starter}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!--<version>${version.springboot}</version>-->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+        <!-- datasource -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${version.mysql}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${version.druid}</version>
+		</dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${version.starter}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.dynamic-sql</groupId>
+            <artifactId>mybatis-dynamic-sql</artifactId>
+            <version>${version.mybatis-dynamic-sql}</version>
+        </dependency>
+
+		<!-- servlet -->
+        <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${version.servlet}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${version.jsp}</version>
+		</dependency>
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>${version.jstl}</version>
+		</dependency>
+		<!-- httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${version.httpclient}</version>
+		</dependency>
+
+		<!-- vertx -->
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+			<version>${version.vertx}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-web</artifactId>
+			<version>${version.vertx}</version>
+		</dependency>
+		<!-- ehcache缓存 -->
+		<!--     <dependency>
+                 <groupId>net.sf.ehcache</groupId>
+                 <artifactId>ehcache-core</artifactId>
+                 <version>${version.ehcache.core}</version>
+             </dependency>
+     -->
+		<!-- tools -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${version.guava}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>${version.pinyin4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${version.commons.lang3}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${version.commons.fileupload}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${version.commons.io}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${version.commons.lang}</version>
+		</dependency>
+
+		<!-- 任务执行器 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${version.quartz}</version>
+		</dependency>
+
+		<!-- json解析 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${version.fasterxml.jackson}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${version.fasterxml.jackson}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${version.fasterxml.jackson}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${version.alibaba.fastjson}</version>
+		</dependency>
+
+
+		<!-- xml解析 -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>${version.xstream}</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${version.dom4j}</version>
+		</dependency>
+
+		<!-- log4j2 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.slf4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${version.log4j2}</version>
+		</dependency>
+
+    <!-- motan rpc -->
+    <dependency>
+        <groupId>com.weibo</groupId>
+        <artifactId>motan-core</artifactId>
+        <version>${version.motan}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>com.weibo</groupId>
+        <artifactId>motan-transport-netty</artifactId>
+        <version>${version.motan}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>com.weibo</groupId>
+        <artifactId>motan-springsupport</artifactId>
+        <version>${version.motan}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    </dependencies>
+	<!-- nexus maven私服 @author 刘俊 @date 2016年4月19日 -->
+	<!-- 内部包发布 -->
+	<distributionManagement>
+		<repository>
+			<id>nexus-release</id>
+			<url>http://nexus.geekplus.cc:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://nexus.geekplus.cc:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- 中央仓库 -->
+	<repositories>
+		<repository>
+			<id>nexus-public</id>
+			<name>Public Repository of GeekPlus</name>
+			<url>http://nexus.geekplus.cc:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus-plugin</id>
+			<name>Public PluginRepository of GeekPlus</name>
+			<url>http://nexus.geekplus.cc:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<finalName>maptest</finalName>
+		<plugins>
+            <!-- mybatis-generator myba-->
+			<!--<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${version.mybatis-generator}</version>
+				<dependencies>
+
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${version.mysql}</version>
+
+					</dependency>
+				</dependencies>
+				<configuration>
+					<configurationFile>src/main/resources/config/mybatis-generator/generatorConfig.xml</configurationFile>
+					&lt;!&ndash;允许移动生成的文件&ndash;&gt;
+					<verbose>true</verbose>
+					&lt;!&ndash;允许覆盖生成的文件&ndash;&gt;
+					<overwrite>true</overwrite>
+				</configuration>
+				&lt;!&ndash; 自动生成 &ndash;&gt;
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+
+					</execution>
+				</executions>
+			</plugin>-->
+
+			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classesDirectory>target/classes/</classesDirectory>
+					<excludes>
+						<exclude>config/</exclude>
+						<exclude>*.xml</exclude>
+						<exclude>*.properties</exclude>
+						<exclude>*.yml</exclude>
+					</excludes>
+					<archive>
+						<manifest>
+							<mainClass>com.geekplus.test.athena.application.ApplicationStart</mainClass>
+							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>./resources/lib</classpathPrefix>
+						</manifest>
+						<!-- 指定classpath -->
+						<manifestEntries>
+							<Class-Path>./resources/</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<!-- 把jar文件输出到外部目录 -->
+						<configuration>
+							<type>jar</type>
+							<includeTypes>jar</includeTypes>
+							<outputDirectory>
+								${project.build.directory}/resources/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- 把jar所依赖的配置文件打在jar的外部目录 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy-config-files</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<!-- 输出目录 -->
+							<outputDirectory>${project.build.directory}/resources</outputDirectory>
+							<resources>
+								<resource>
+									<!-- 要打包的目录 -->
+									<directory>${basedir}/src/main/resources</directory>
+									<includes>
+										<!-- 要打包的文件 -->
+										<include>config/**/*.*</include>
+										<include>*.xml</include>
+										<include>*.properties</include>
+										<include>*.yml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

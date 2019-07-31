@@ -1,0 +1,34 @@
+logging:
+  config: classpath:config/log/log4j2.xml
+server.:
+  port: 62001
+  servlet.:
+    context-path: /athenatest
+
+spring:
+  datasource:
+      name: athena
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://172.16.3.19:3306/athena_3.1.6picking?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      type: com.alibaba.druid.pool.DruidDataSource
+      connectionProperties: druid.stat.mergeSql=true
+  task:
+      pool:
+        max-threads: 25
+        queue-capacity: 100
+        keep-alive: 10s
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+
+# 根据地圖解析模式初始化货架，Database,Xml,NOShelfArea ,null
+map.resolver:
+pagehelper:
+  helper-dialect: mysql
+  params: countSql
+  reasonable: true
+  support-methods-arguments: true
+
