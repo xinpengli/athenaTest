@@ -55,7 +55,7 @@
 		<version.commons.lang>2.6</version.commons.lang>
 		<version.commons.codec>1.10</version.commons.codec>
 		<version.commons.fileupload>1.3.2</version.commons.fileupload>
-		<version.commons.io>2.5</version.commons.io>
+		<version.commons.io>2.7</version.commons.io>
 		<version.poi>3.16</version.poi>
 		<version.pinyin4j>2.5.1</version.pinyin4j>
 
