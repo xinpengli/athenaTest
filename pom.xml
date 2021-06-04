@@ -50,7 +50,7 @@
 		<version.log4j2>2.10.0</version.log4j2>
 		<version.dom4j>1.6.1</version.dom4j>
 		<version.xstream>1.4.8</version.xstream>
-		<version.httpclient>4.5.1</version.httpclient>
+		<version.httpclient>4.5.13</version.httpclient>
 		<version.commons.lang3>3.4</version.commons.lang3>
 		<version.commons.lang>2.6</version.commons.lang>
 		<version.commons.codec>1.10</version.commons.codec>
